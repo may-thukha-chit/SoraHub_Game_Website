@@ -1,0 +1,147 @@
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --accent: #38bdf8;
+    --text: #f8fafc;
+    --card-back: #1e293b;
+    --card-front: #334155;
+    --success: #4ecca3;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.home-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--surface);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    font-weight: bold;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+.home-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+.scoreboard {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    background: var(--surface);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls {
+    margin-bottom: 10px;
+}
+
+#status {
+    height: 30px;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+/* 🟦 GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 15px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+/* 🃏 CARD */
+.card {
+    width: 100px;
+    height: 100px;
+    background: var(--card-back);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 🔥 IMPORTANT FOR FAST FLIP */
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease, background 0.25s ease;
+    user-select: none;
+}
+
+/* emoji face */
+.card span {
+    transform: rotateY(180deg);
+}
+
+/* FLIPPED */
+.card.flipped {
+    background: var(--card-front);
+    transform: rotateY(180deg);
+}
+
+/* MATCHED */
+.card.matched {
+    background: var(--success);
+    border-color: var(--success);
+    cursor: default;
+    animation: pop 0.25s ease;
+}
+
+/* MATCH ANIMATION */
+@keyframes pop {
+    0%   { transform: scale(1) rotateY(180deg); }
+    50%  { transform: scale(1.12) rotateY(180deg); }
+    100% { transform: scale(1) rotateY(180deg); }
+}
+
+/* BUTTONS */
+button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 5px;
+    transition: opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#resetBtn {
+    background: var(--surface);
+    border: 1px solid var(--accent);
+}
+
+#status {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}

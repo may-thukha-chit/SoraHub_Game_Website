@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snakes & Ladders Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="confetti-canvas"></canvas>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-back">
+                <span class="icon">←</span> Back to Hub
+            </a>
+            <div class="nav-title">Snakes & Ladders</div>
+            <div class="nav-spacer"></div>
+        </div>
+    </nav>
+    
+    <div class="main-wrapper">
+        <div class="game-container">
+            <div id="board" class="board"></div>
+
+            <aside class="controls">
+                <div class="mode-selection">
+                    <button id="vs-ai-btn" class="active">Vs AI 🤖</button>
+                    <button id="vs-human-btn">2 Players 👥</button>
+                </div>
+
+                <div class="status-panel">
+                    <h2 id="turn-text">Player 1's Turn</h2>
+                    <div id="dice-result">Roll to start!</div>
+                </div>
+
+                <div class="dice-scene">
+                    <div id="dice-cube" class="cube">
+                        <div class="face front">1</div>
+                        <div class="face back">6</div>
+                        <div class="face right">3</div>
+                        <div class="face left">4</div>
+                        <div class="face top">2</div>
+                        <div class="face bottom">5</div>
+                    </div>
+                </div>
+
+                <button id="roll-btn" class="btn-primary">🎲 Roll Dice</button>
+
+                <div class="settings">
+                    <label>🏎️ Game Speed</label>
+                    <input type="range" id="speed-slider" min="100" max="1000" value="500">
+                </div>
+
+                <div id="avatar-setup" class="avatar-setup">
+                    <h3>Choose Avatar</h3>
+                    <div class="avatar-options">
+                        <span class="avatar-opt selected" data-char="🔵">🔵</span>
+                        <span class="avatar-opt" data-char="🐶">🐶</span>
+                        <span class="avatar-opt" data-char="🐱">🐱</span>
+                        <span class="avatar-opt" data-char="👽">👽</span>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="winner-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🎉 Victory! 🎉</h2>
+            <p id="winner-text"></p>
+            <button id="play-again-btn" class="btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

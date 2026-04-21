@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sora Hub - Digital Arcade</title>
+    <link rel="stylesheet" href="hub-style.css">
+</head>
+<body>
+    <div class="hub-container">
+        <header>
+            <h1 class="logo">SORA<span>HUB</span></h1>
+            <div class="stats-panel">
+                <div class="stat">
+                    <span class="stat-label">Total Victories</span>
+                    <span id="total-wins" class="stat-value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-grid">
+            <a href="ttt_game/index.html" class="game-card">
+                <div class="card-icon">❌</div>
+                <div class="card-content">
+                    <h3>Tic-Tac-Toe</h3>
+                    <p>Beat the Hard AI</p>
+                    <div class="win-count">Wins: <span id="ttt-wins">0</span></div>
+                </div>
+            </a>
+        
+            <a href="snake_game/index.html" class="game-card">
+                <div class="card-icon">🐍</div>
+                <div class="card-content">
+                    <h3>Snake & Ladders</h3>
+                    <p>Race to the finish</p>
+                    <div class="win-count">Wins: <span id="sl-wins">0</span></div>
+                </div>
+            </a>
+        
+            <a href="memory_game/index.html" class="game-card">
+                <div class="card-icon">🧠</div> <div class="card-content">
+                    <h3>Memory Match</h3>
+                    <p>Train your brain</p>
+                    <div class="win-count">Wins: <span id="mem-wins">0</span></div>
+                </div>
+            </a>
+        
+            <a href="connect4_game/index.html" class="game-card">
+                <div class="card-icon">🔵</div>
+                <div class="card-content">
+                    <h3>Connect Four</h3>
+                    <p>4 in a row to win</p>
+                    <div class="win-count">Wins: <span id="c4-wins">0</span></div>
+                </div>
+            </a>
+        </main>
+
+        <footer>
+            <a href="about.html" class="secondary-link">About Sora Hub</a>
+            <button id="reset-global" class="danger-link">Reset All Progress</button>
+        </footer>
+    </div>
+    <script src="hub-script.js"></script>
+</body>
+</html>

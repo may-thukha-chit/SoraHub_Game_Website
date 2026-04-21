@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sora Hub - Connect Four</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrap">
+        <div class="header-row">
+            <h1>Connect Four</h1>
+            <a href="../index.html" class="home-btn">← Back to Hub</a>
+        </div>
+    
+        <div class="ui-bar">
+            <button id="theme-toggle">🌓 Theme</button>
+            <button id="modeBtn">Mode: vs AI</button>
+            <button id="resetBtn">New Game</button>
+        </div>
+
+        <div id="status">Red's Turn</div>
+
+        <div class="score-board">
+            <div class="player p1">Player 1 (Red): <span id="s1">0</span></div>
+            <div class="player p2">AI / Player 2 (Yellow): <span id="s2">0</span></div>
+        </div>
+
+        <div class="board-container">
+            <div class="board" id="board"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

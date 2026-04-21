@@ -1,0 +1,140 @@
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #f8fafc;
+    --accent: #38bdf8;
+    --cell-bg: #334155;
+    --x-color: #f87171;
+    --o-color: #60a5fa;
+    --danger: #ef4444;
+}
+
+body.light-theme {
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --cell-bg: #e2e8f0;
+    --accent: #0284c7;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
+
+.main-layout {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between; /* This pushes items to opposite sides */
+    align-items: center;            /* This centers them vertically */
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.header-row h1 {
+    margin: 0; /* Removes default spacing to keep it aligned with the button */
+}
+
+/* Back to Hub Button Styling */
+.home-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--surface);
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--accent);
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.home-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    transform: translateY(-2px);
+}
+.game-section { flex: 2; text-align: center; }
+
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+
+.top-controls { display: flex; gap: 10px; }
+
+#status { font-size: 1.5rem; font-weight: bold; margin-bottom: 20px; color: var(--accent); }
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 110px);
+    gap: 15px;
+    margin: 0 auto;
+    width: max-content;
+}
+
+.cell {
+    width: 110px;
+    height: 110px;
+    background: var(--cell-bg);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cell:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+.cell.x { color: var(--x-color); }
+.cell.o { color: var(--o-color); }
+
+.scoreboard { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
+.score-card { background: var(--surface); padding: 15px 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+
+.history-section {
+    flex: 1;
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+}
+
+#history-list { list-style: none; padding: 0; }
+.history-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--cell-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button, select {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: var(--surface);
+    color: var(--text);
+    transition: opacity 0.2s;
+}
+
+.primary-btn { background: var(--accent); color: white; }
+.danger-btn { color: var(--danger); }
+button:hover { opacity: 0.8; }

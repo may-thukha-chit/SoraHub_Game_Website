@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Tic-Tac-Toe AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+
+    <div class="main-layout">
+        <section class="game-section">
+            <div class="header-row">
+                <h1>Tic-Tac-Toe</h1>
+                <a href="../index.html" class="home-btn">← Back to Hub</a>
+            </div>
+        
+            <div class="header">
+                <div class="top-controls">
+                    <select id="game-mode">
+                        <option value="pvp">👥 2 Players</option>
+                        <option value="ai">🤖 vs. AI (Hard)</option>
+                    </select>
+                    <button id="theme-toggle">🌓 Theme</button>
+                </div>
+            </div>
+            
+            <div id="status">Player X's Turn</div>
+
+            <div class="board" id="board">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+
+            <div class="scoreboard">
+                <div class="score-card">Player X: <span id="x-wins">0</span></div>
+                <div class="score-card">Player O: <span id="o-wins">0</span></div>
+            </div>
+
+            <div class="footer-controls">
+                <button id="reset-btn" class="primary-btn">New Round</button>
+                <button id="clear-storage" class="danger-btn">Wipe Data</button>
+            </div>
+        </section>
+
+        <aside class="history-section">
+            <h2>Match History</h2>
+            <ul id="history-list"></ul>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

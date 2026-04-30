@@ -5,7 +5,33 @@ let scores = JSON.parse(localStorage.getItem('c4-data')) || { p1: 0, p2: 0 };
 const boardEl = document.getElementById('board');
 const statusEl = document.getElementById('status');
 
+// 🎵 AUDIO ENGINE
+const SOUND_URLS = {
+    drop: './sounds/drop.mp3',
+    win: './sounds/win.mp3',
+    draw: './sounds/draw.mp3'
+};
+const audioElements = {};
+
+function loadSounds() {
+    for (const [key, url] of Object.entries(SOUND_URLS)) {
+        const audio = new Audio(url);
+        audio.preload = 'auto'; 
+        audioElements[key] = audio;
+    }
+}
+
+function playSound(key) {
+    if (audioElements[key]) {
+        audioElements[key].currentTime = 0; 
+        audioElements[key].play().catch(error => console.log("Audio blocked:", error));
+    }
+}
+
+// 🎮 GAME LOGIC
 function initGame() {
+    loadSounds(); // Initialize audio
+
     board = Array(ROWS).fill().map(() => Array(COLS).fill(null));
     boardEl.innerHTML = '';
     gameActive = true;
@@ -34,10 +60,12 @@ function makeMove(col) {
     for (let r = ROWS - 1; r >= 0; r--) {
         if (!board[r][col]) {
             board[r][col] = currentPlayer;
-            const slot = document.getElementById(`slot-${r}-${c = col}`);
+            const slot = document.getElementById(`slot-${r}-${col}`);
             const piece = document.createElement('div');
             piece.classList.add('piece', currentPlayer);
             slot.appendChild(piece);
+
+            playSound('drop'); // Play piece drop sound
 
             if (checkWin(r, col)) {
                 endGame(currentPlayer);
@@ -84,8 +112,10 @@ function endGame(result) {
     gameActive = false;
     if (result === 'draw') {
         statusEl.innerText = "It's a Draw!";
+        playSound('draw'); // Play draw sound
     } else {
         statusEl.innerText = `${result.toUpperCase()} WINS!`;
+        playSound('win'); // Play win sound
         result === 'red' ? scores.p1++ : scores.p2++;
         localStorage.setItem('c4-data', JSON.stringify(scores));
         
@@ -103,7 +133,6 @@ function updateScoreUI() {
     }
 }
 
-
 const themeBtn = document.getElementById('theme-toggle');
 if (themeBtn) {
     themeBtn.addEventListener('click', () => {
@@ -117,13 +146,11 @@ if (localStorage.getItem('c4-theme') === 'light') {
     document.body.classList.add('light-theme');
 }
 
-
 document.getElementById('modeBtn').onclick = (e) => {
     isAiMode = !isAiMode;
     e.target.innerText = isAiMode ? "Mode: vs AI" : "Mode: 2 Player";
     initGame();
 };
 document.getElementById('resetBtn').onclick = initGame;
-
 
 initGame();

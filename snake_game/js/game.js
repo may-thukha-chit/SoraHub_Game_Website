@@ -122,6 +122,36 @@ async function moveToken(player, steps) {
     await checkEntities(player);
 }
 
+// Store the loaded audio objects
+const audioElements = {};
+
+// Pre-load the audio so there is no delay when clicking
+function loadSounds() {
+    for (const [key, url] of Object.entries(SOUND_URLS)) {
+        const audio = new Audio(url);
+        audio.preload = 'auto'; 
+        audioElements[key] = audio;
+    }
+}
+
+// Play the sound
+function playSound(key) {
+    if (audioElements[key]) {
+        
+        audioElements[key].currentTime = 0; 
+        
+        
+        audioElements[key].play().catch(error => {
+            console.log("Audio blocked by browser policy:", error);
+        });
+    }
+}
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function checkEntities(player) {
     if (SNAKES[player.position]) {
         await sleep(400); playSound("snake");

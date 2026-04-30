@@ -20,7 +20,33 @@ const AI_MEMORY_LIMIT = 6;
 let history = JSON.parse(localStorage.getItem('memoryGameScores')) || { p1: 0, p2: 0 };
 updateScoreUI();
 
+// 🎵 AUDIO ENGINE
+const SOUND_URLS = {
+    flip: './sounds/flip.mp3',
+    match: './sounds/match.mp3',
+    fail: './sounds/fail.mp3'
+};
+const audioElements = {};
+
+function loadSounds() {
+    for (const [key, url] of Object.entries(SOUND_URLS)) {
+        const audio = new Audio(url);
+        audio.preload = 'auto'; 
+        audioElements[key] = audio;
+    }
+}
+
+function playSound(key) {
+    if (audioElements[key]) {
+        audioElements[key].currentTime = 0; 
+        audioElements[key].play().catch(error => console.log("Audio blocked:", error));
+    }
+}
+
+// 🎮 GAME LOGIC
 function initGame() {
+    loadSounds(); // Initialize audio
+
     grid.innerHTML = '';
     cards = [...emojis].sort(() => Math.random() - 0.5);
     flipped = [];
@@ -54,6 +80,8 @@ function flipCard(index) {
 
     if (lockBoard || flipped.includes(index) || card.classList.contains('matched')) return;
 
+    playSound('flip'); // Play flip sound
+
     card.classList.add('flipped');
     card.innerHTML = `<span>${cards[index]}</span>`;
     flipped.push(index);
@@ -68,6 +96,8 @@ function checkMatch() {
     const cardEls = document.querySelectorAll('.card');
 
     if (cards[a] === cards[b]) {
+        playSound('match'); // Play match success sound
+
         setTimeout(() => {
             cardEls[a].classList.add('matched');
             cardEls[b].classList.add('matched');
@@ -79,6 +109,8 @@ function checkMatch() {
             }
         }, 150);
     } else {
+        playSound('fail'); // Play match fail sound
+
         setTimeout(() => {
             cardEls[a].classList.remove('flipped');
             cardEls[b].classList.remove('flipped');
@@ -98,6 +130,7 @@ function showAiMessage(text, duration = 600) {
     statusText.innerText = text;
     setTimeout(updateStatus, duration);
 }
+
 function aiMove() {
     const cardEls = document.querySelectorAll('.card');
     let first = -1, second = -1;

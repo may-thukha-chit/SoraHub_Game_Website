@@ -15,7 +15,34 @@ let gameActive = true;
 
 const winConditions = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
+// 🎵 AUDIO ENGINE
+const SOUND_URLS = {
+    place: './sounds/place.mp3',
+    think: './sounds/think.mp3',
+    win: './sounds/win.mp3',
+    draw: './sounds/draw.mp3'
+};
+const audioElements = {};
+
+function loadSounds() {
+    for (const [key, url] of Object.entries(SOUND_URLS)) {
+        const audio = new Audio(url);
+        audio.preload = 'auto'; 
+        audioElements[key] = audio;
+    }
+}
+
+function playSound(key) {
+    if (audioElements[key]) {
+        audioElements[key].currentTime = 0; 
+        audioElements[key].play().catch(error => console.log("Audio blocked:", error));
+    }
+}
+
+// 🎮 GAME LOGIC
 function init() {
+    loadSounds(); // Initialize audio
+    
     document.body.className = currentTheme;
     modeSelect.value = gameMode;
     document.getElementById('x-wins').innerText = wins.X;
@@ -33,6 +60,7 @@ function init() {
     
     // If it was AI's turn when refreshed
     if (gameMode === 'ai' && currentPlayer === 'O' && !checkWinner(gameState)) {
+        playSound('think');
         setTimeout(aiMove, 500);
     }
 }
@@ -45,11 +73,14 @@ function handleCellClick(e) {
 
     if (gameActive && gameMode === 'ai' && currentPlayer === 'O') {
         gameActive = false; // Pause user input
+        playSound('think'); // Play thinking sound before AI moves
         setTimeout(aiMove, 500);
     }
 }
 
 function executeMove(idx, player) {
+    playSound('place'); // Play placement sound
+    
     gameState[idx] = player;
     cells[idx].innerText = player;
     cells[idx].classList.add(player.toLowerCase());
@@ -75,9 +106,13 @@ function checkWinner(board) {
 
 function endGame(result) {
     gameActive = false;
-    statusText.innerText = result === "Draw" ? "It's a Draw!" : `Player ${result} Wins!`;
     
-    if (result !== "Draw") {
+    if (result === "Draw") {
+        statusText.innerText = "It's a Draw!";
+        playSound('draw'); // Play draw sound
+    } else {
+        statusText.innerText = `Player ${result} Wins!`;
+        playSound('win'); // Play win sound
         wins[result]++;
         document.getElementById('x-wins').innerText = wins.X;
         document.getElementById('o-wins').innerText = wins.O;

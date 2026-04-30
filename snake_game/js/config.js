@@ -19,9 +19,8 @@ const LADDERS = {
 };
 
 const SOUND_URLS = {
-    roll: 'https://www.soundjay.com/board-games/sounds/dice-roll-1.mp3',
-    move: 'https://www.soundjay.com/button/sounds/button-16.mp3',
-    win: 'https://www.soundjay.com/human/sounds/applause-01.mp3',
-    snake: 'https://www.soundjay.com/nature/sounds/snake-hiss-1.mp3',
-    ladder: 'https://www.soundjay.com/communication/sounds/chime-glass-1.mp3'
-};
+    roll: './sounds/dice-roll-1.mp3',
+    move: './sounds/button-16.mp3',
+    win: './sounds/applause-01.mp3',
+    snake: './sounds/snake-hiss-1.mp3',
+    };
